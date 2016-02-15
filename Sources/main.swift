@@ -5,7 +5,7 @@ import Redbird
 
 do {
 
-	let redis = try Redbird(port: 6379)
+	// let redis = try Redbird(port: 6379)
 
 	get { request in
 	  	return Response(.Ok, contentType: "text/plain", body: "Pong")

@@ -2,11 +2,12 @@ import Inquiline
 import Curassow
 import Frank
 import Redbird
+import Environment
 
 do {
 
-	// let args = Process.arguments
-	// print("arguments: \(args)")
+	let redisUrl = Environment().getVar("REDIS_URL")
+	print("redis url: \(redisUrl)")
 
 	// let redis = try Redbird(address: "127.0.0.1", port: 6379)
 

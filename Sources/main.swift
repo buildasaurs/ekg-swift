@@ -12,6 +12,7 @@ do {
 	// let redis = try Redbird(address: "127.0.0.1", port: 6379)
 
 	get { request in
+		print("redis url: \(redisUrl)")
 	  	return Response(.Ok, contentType: "text/plain", body: "Pong")
 	}
 

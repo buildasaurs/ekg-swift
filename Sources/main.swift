@@ -5,8 +5,8 @@ import Redbird
 
 do {
 
-	let args = Process.arguments
-	print("arguments: \(args)")
+	// let args = Process.arguments
+	// print("arguments: \(args)")
 
 	// let redis = try Redbird(address: "127.0.0.1", port: 6379)
 

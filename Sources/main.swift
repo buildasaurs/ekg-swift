@@ -1,29 +1,38 @@
-import Inquiline
 import Curassow
-import Frank
+import Nest
+import Inquiline
 import Redbird
-import Environment
+
+typealias EndpointHandler = RequestType throws -> ResponseType
 
 do {
 
-	let redisUrl = Environment().getVar("REDIS_URL")
-	print("redis url: \(redisUrl)")
+    //connect to redis
+    let redis = try startRedis()
 
-	// let redis = try Redbird(address: "127.0.0.1", port: 6379)
+    //connect endpoints
+    var endpoints = [String: [String: EndpointHandler]]()
 
-	get { request in
-		print("redis url: \(redisUrl)")
-	  	return Response(.Ok, contentType: "text/plain", body: "Pong")
-	}
+    endpoints["/"] = ["GET": addRoot()]
+    endpoints["/v1/beep/redis"] = ["GET": addHealth(redis)]
+    endpoints["/v1/beep"] = ["POST": addHeartbeat_Post(redis)]
+    endpoints["/v1/beep/all"] = ["GET": addHeartbeat_GetAll(redis)]
 
-	get("v1") { request in
-		return Response(.Ok, contentType: "text/plain", body: "Did things")
-	}
-
-	// start the server
-	serve(call)
+    // start the server
+    serve { request in
+        do {
+            return try endpoints[request.path]?[request.method]?(request) ?? Response(.NotFound)
+        } catch {
+            let s = "Error occured on request: \(request.path), "
+            var e = "Error: " //crashes when we print error :(
+            // e += "\(error)"
+            let out = s + e
+            print(out)
+            return Response(.InternalServerError)
+        }
+    }
 } catch {
-	fatalError("\(error)")
+    fatalError("\(error)")
 }
 
-// func dictionarifyArguments
+

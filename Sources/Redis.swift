@@ -1,6 +1,11 @@
 import Environment
 import Redbird
+
+#if os(Linux)
+import Glibc
+#else
 import Darwin
+#endif
 
 func startRedis() throws -> Redbird {
 

@@ -7,6 +7,8 @@ func startRedis() throws -> Redbird {
         throw Error("No REDIS_URL environment variable provided")
     }
 
+    print("Have redis url: \(redisUrl)")
+
     let parsed = URLParser(url: redisUrl)
     let address = parsed.host ?? "127.0.0.1"
     let port = parsed.port ?? 6379

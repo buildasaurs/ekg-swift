@@ -1,26 +1,23 @@
-import Foundation
+import Jay
 
 struct JSON {
 
-    static func parse(fromString string: String) throws -> AnyObject {
+    static func parse(fromString string: String) throws -> Any {
 
         //in the future take the byte stream instead of string
         //assuming UTF-8 
-        guard let data = string.dataUsingEncoding(NSUTF8StringEncoding) else {
-            throw Error("Failed to parse incoming body data")
-        }
-
+        let data = Array(string.utf8)
         do {
-            let object = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions())
+            let object = try Jay().jsonFromData(data)
             return object
         } catch {
             throw Error("Failed to parse body data, error \(error)")
         }
     }
 
-    static func parseDictionary(fromString string: String) throws -> [String: AnyObject] {
-        guard let dict = try JSON.parse(fromString: string) as? [String: AnyObject] else {
-            throw Error("Body is not a JSON object")   
+    static func parseDictionary(fromString string: String) throws -> [String: Any] {
+        guard let dict = try JSON.parse(fromString: string) as? [String: Any] else {
+            throw Error("Body is not a JSON object")
         }
         return dict
     }

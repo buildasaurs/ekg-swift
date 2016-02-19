@@ -1,4 +1,4 @@
 
-func validateEvent(event: [String: AnyObject]) -> Bool {
+func validateEvent(event: [String: Any]) -> Bool {
 	return true
 }

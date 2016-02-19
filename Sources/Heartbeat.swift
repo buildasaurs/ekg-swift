@@ -20,15 +20,15 @@ func addHeartbeat_Post(redis: Redbird) -> EndpointHandler {
 			}
 
 			//get a new id for the event
-			let id = try redis.command("INCR", params: ["next_event_id"]).toInt()
-			dict["event_id"] = id
-			dict["timestamp"] = Int(NSDate().timeIntervalSince1970 * 1000) //milliseconds
+			// let id = try redis.command("INCR", params: ["next_event_id"]).toInt()
+			// dict["event_id"] = id
+			// dict["timestamp"] = Int(NSDate().timeIntervalSince1970 * 1000) //milliseconds
 
 			//TODO: we actually need NSJSONSerialization to turn the edited object back into
 			//a json string, which isn't possible at the moment :( waiting for swift Foundation
 			//to have that ability.
 
-			print("Done: " + String(dict))
+			print("No saved but done for now: \n" + String(dict))
 			return Response(.Created)
 		} catch let e as Error {
 			return Response(.BadRequest, body: "\(e.message)")

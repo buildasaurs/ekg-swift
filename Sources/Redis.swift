@@ -1,19 +1,11 @@
 import Environment
 import Redbird
 
-#if os(Linux)
-import Glibc
-#else
-import Darwin
-#endif
-
 func startRedis() throws -> Redbird {
 
     guard let redisUrl = Environment().getVar("REDIS_URL") else {
         throw Error("No REDIS_URL environment variable provided")
     }
-
-    fputs("Have redis url: \(redisUrl)\n", __stderrp)
 
     let parsed = URLParser(url: redisUrl)
     let address = parsed.host ?? "127.0.0.1"

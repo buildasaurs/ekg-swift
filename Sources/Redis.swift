@@ -11,8 +11,6 @@ func startRedis() throws -> Redbird {
     let address = parsed.host ?? "127.0.0.1"
     let port = parsed.port ?? 6379
 
-    fatalError("Redis: \(address), \(port), \(parsed.password)")
-
     let redis = try Redbird(address: address, port: port)
     if let password = parsed.password {
         try redis.auth(password: password)

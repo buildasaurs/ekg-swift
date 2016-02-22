@@ -32,7 +32,7 @@ do {
         }
     }
 } catch {
-    fatalError("\(error)")
+    fatalError("Redis at \(redis.address):\(redis.port): \(error)")
 }
 
 

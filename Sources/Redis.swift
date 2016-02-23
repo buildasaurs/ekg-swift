@@ -9,8 +9,15 @@ func startRedis() throws -> Redbird {
 
     let parsed = URLParser(url: redisUrl)
     let address = parsed.host ?? "127.0.0.1"
-    let port = parsed.port ?? 6379
-
+    //Swift Foundation has broken .port for NSURLComponents, so we need to hack here
+    //split string by colon, take last element and try to create an Int out of it.
+    var port: Int = 6379
+    if let portCandidate = redisUrl.characters.split(":").map(String.init).last {
+        if let p = Int(portCandidate) {
+            port = p
+        }
+    }
+    
     let redis = try Redbird(address: address, port: port)
     if let password = parsed.password {
         try redis.auth(password: password)

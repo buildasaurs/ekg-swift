@@ -32,7 +32,7 @@ do {
         }
     }
 } catch {
-    fatalError("\(error)")
+    fatalError("\(error) Redis url: '\(Environment().getVar("REDIS_URL"))'")
 }
 
 

@@ -2,6 +2,7 @@ import Curassow
 import Nest
 import Inquiline
 import Redbird
+import Environment
 
 typealias EndpointHandler = RequestType throws -> ResponseType
 

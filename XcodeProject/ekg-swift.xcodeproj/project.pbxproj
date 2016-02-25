@@ -15,14 +15,14 @@
 		3A075C541C7F20F7002A5D26 /* Redis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A075C4C1C7F20F7002A5D26 /* Redis.swift */; };
 		3A075C551C7F20F7002A5D26 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A075C4D1C7F20F7002A5D26 /* Root.swift */; };
 		3A075C561C7F20F7002A5D26 /* URLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A075C4E1C7F20F7002A5D26 /* URLParser.swift */; };
-		3A07C87F1C7F22A90010976D /* Commander.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C8771C7F22A90010976D /* Commander.a */; };
-		3A07C8801C7F22A90010976D /* Curassow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C8781C7F22A90010976D /* Curassow.a */; };
-		3A07C8811C7F22A90010976D /* Environment.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C8791C7F22A90010976D /* Environment.a */; };
-		3A07C8821C7F22A90010976D /* Inquiline.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C87A1C7F22A90010976D /* Inquiline.a */; };
-		3A07C8831C7F22A90010976D /* Jay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C87B1C7F22A90010976D /* Jay.a */; };
-		3A07C8841C7F22A90010976D /* Nest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C87C1C7F22A90010976D /* Nest.a */; };
-		3A07C8851C7F22A90010976D /* Redbird.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C87D1C7F22A90010976D /* Redbird.a */; };
-		3A07C8861C7F22A90010976D /* Requests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C87E1C7F22A90010976D /* Requests.a */; };
+		3A07C8891C7F311A0010976D /* Commander.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C8771C7F22A90010976D /* Commander.a */; };
+		3A07C88A1C7F311A0010976D /* Curassow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C8781C7F22A90010976D /* Curassow.a */; };
+		3A07C88B1C7F311A0010976D /* Environment.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C8791C7F22A90010976D /* Environment.a */; };
+		3A07C88C1C7F311A0010976D /* Inquiline.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C87A1C7F22A90010976D /* Inquiline.a */; };
+		3A07C88D1C7F311A0010976D /* Jay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C87B1C7F22A90010976D /* Jay.a */; };
+		3A07C88E1C7F311A0010976D /* Nest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C87C1C7F22A90010976D /* Nest.a */; };
+		3A07C88F1C7F311A0010976D /* Redbird.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C87D1C7F22A90010976D /* Redbird.a */; };
+		3A07C8901C7F311A0010976D /* Requests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A07C87E1C7F22A90010976D /* Requests.a */; };
 		3AC90BA81C7F20CE006E640B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC90BA71C7F20CE006E640B /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,14 +64,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A07C87F1C7F22A90010976D /* Commander.a in Frameworks */,
-				3A07C8801C7F22A90010976D /* Curassow.a in Frameworks */,
-				3A07C8811C7F22A90010976D /* Environment.a in Frameworks */,
-				3A07C8821C7F22A90010976D /* Inquiline.a in Frameworks */,
-				3A07C8831C7F22A90010976D /* Jay.a in Frameworks */,
-				3A07C8841C7F22A90010976D /* Nest.a in Frameworks */,
-				3A07C8851C7F22A90010976D /* Redbird.a in Frameworks */,
-				3A07C8861C7F22A90010976D /* Requests.a in Frameworks */,
+				3A07C8891C7F311A0010976D /* Commander.a in Frameworks */,
+				3A07C88A1C7F311A0010976D /* Curassow.a in Frameworks */,
+				3A07C88B1C7F311A0010976D /* Environment.a in Frameworks */,
+				3A07C88C1C7F311A0010976D /* Inquiline.a in Frameworks */,
+				3A07C88D1C7F311A0010976D /* Jay.a in Frameworks */,
+				3A07C88E1C7F311A0010976D /* Nest.a in Frameworks */,
+				3A07C88F1C7F311A0010976D /* Redbird.a in Frameworks */,
+				3A07C8901C7F311A0010976D /* Requests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +309,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/../.build/release/";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/../.build/debug/";
 			};
 			name = Release;
 		};

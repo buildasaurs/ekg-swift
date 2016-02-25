@@ -18,10 +18,8 @@ func startRedis() throws -> Redbird {
         }
     }
     
-    let redis = try Redbird(address: address, port: port)
-    if let password = parsed.password {
-        try redis.auth(password: password)
-    }
-
+    let config = RedbirdConfig(address: address, port: port, password: parsed.password)
+    let redis = try Redbird(config: config)
+    
     return redis
 }

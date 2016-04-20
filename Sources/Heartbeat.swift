@@ -57,8 +57,9 @@ func addHeartbeat_GetAll(redis: Redbird) -> EndpointHandler {
 
 		//since we don't yet have JSON serialization, just wrap the elements in a json array as string and return
 		let out = "[" + strings.joined(separator: ", ") + "]\n"
-
-        return Response(status: .ok, text: out)
+        let data = out.data
+        
+        return Response(status: .ok, headers: ["content-type":"application/json"], body: data)
 	}
 }
 

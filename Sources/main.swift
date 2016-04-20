@@ -1,10 +1,8 @@
-import Curassow
-import Nest
-import Inquiline
+import Vapor
 import Redbird
 import Environment
 
-typealias EndpointHandler = RequestType throws -> ResponseType
+typealias EndpointHandler = Request throws -> ResponseRepresentable
 
 do {
 
@@ -14,24 +12,17 @@ do {
     //connect endpoints
     var endpoints = [String: [String: EndpointHandler]]()
 
-    endpoints["/"] = ["GET": addRoot()]
-    endpoints["/v1/beep/redis"] = ["GET": addHealth(redis)]
-    endpoints["/v1/beep"] = ["POST": addHeartbeat_Post(redis)]
-    endpoints["/v1/beep/all"] = ["GET": addHeartbeat_GetAll(redis)]
-
     // start the server
-    serve { request in
-        do {
-            return try endpoints[request.path]?[request.method]?(request) ?? Response(.NotFound)
-        } catch {
-            let s = "Error occured on request: \(request.path), "
-            var e = "Error: " //crashes when we print error :(
-            // e += "\(error)"
-            let out = s + e
-            print(out)
-            return Response(.InternalServerError)
-        }
-    }
+    let app = Application()
+    
+    app.get("/", handler: addRoot())
+    app.get("/v1/beep/redis", handler: addHealth(redis: redis))
+    app.post("/v1/beep", handler: addHeartbeat_Post(redis: redis))
+    app.get("/v1/beep/all", handler: addHeartbeat_GetAll(redis: redis))
+
+    let port = Int(Environment().getVar("PORT") ?? "8080")
+    app.start(port: port)
+    
 } catch {
     fatalError("\(error) Redis url: '\(Environment().getVar("REDIS_URL"))'")
 }

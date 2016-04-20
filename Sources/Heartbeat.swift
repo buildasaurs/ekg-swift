@@ -1,22 +1,23 @@
 import Redbird
-import Inquiline
+import Vapor
 import class Foundation.NSDate
 
 func addHeartbeat_Post(redis: Redbird) -> EndpointHandler {
 	return { request in 
 
 		do {
-			guard let body = request.body else { throw Error("No body supplied") }
-
+            var body = request.body
+            let bytes = try body.becomeBuffer().bytes
+            
 			//parse from string/data
-			var dict = try JSON.parseDictionary(fromString: body)
-
+			var dict = try JSONUtils.parseDictionary(fromData: bytes)
+            
 			//validate event for required fields
-			guard validateEvent(dict) else { throw Error("Event did not pass validation") }
+			guard validate(event: dict) else { throw Error("Event did not pass validation") }
 
 			if let testGen = dict["test_generated"] as? Bool where testGen {
 				print("Not saving a test event")
-				return Response(.Created)
+                return Response(status: .created)
 			}
 
 			//get a new id for the event
@@ -25,15 +26,15 @@ func addHeartbeat_Post(redis: Redbird) -> EndpointHandler {
 			dict["timestamp"] = Int(NSDate().timeIntervalSince1970 * 1000) //milliseconds
 
 			//turn back into data/string
-			let out = try JSON.serialize(dict)
+			let out = try JSONUtils.serialize(dict: dict)
 
 			//save this to redis
-			let res = try redis.command("ZADD", params: ["events", String(id), out])
-			return Response(.Created)
+			try redis.command("ZADD", params: ["events", String(id), out])
+            return Response(status: .created)
 		} catch let e as Error {
-			return Response(.BadRequest, body: "\(e.message)")
+			return Response(status: .badRequest, text: "\(e.message)")
 		} catch {
-			return Response(.BadRequest)
+			return Response(status: .badRequest)
 		}
 	}
 }
@@ -55,9 +56,9 @@ func addHeartbeat_GetAll(redis: Redbird) -> EndpointHandler {
 		let strings = try arr.map { try $0.toString() }
 
 		//since we don't yet have JSON serialization, just wrap the elements in a json array as string and return
-		let out = "[" + strings.joinWithSeparator(", ") + "]\n"
+		let out = "[" + strings.joined(separator: ", ") + "]\n"
 
-		return Response(.Ok, contentType: "application/json", body: out)
+        return Response(status: .ok, text: out)
 	}
 }
 

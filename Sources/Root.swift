@@ -1,7 +1,7 @@
-import Inquiline
+import Vapor
 
 func addRoot() -> EndpointHandler {
     return { request in
-        return Response(.Ok, contentType: "text/plain", body: "Nothing to see here")
+        return "Nothing to see here"
     }
 }

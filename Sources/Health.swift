@@ -1,6 +1,5 @@
-import Nest
+import Vapor
 import Redbird
-import Inquiline
 
 func addHealth(redis: Redbird) -> EndpointHandler {
 
@@ -24,9 +23,9 @@ func addHealth(redis: Redbird) -> EndpointHandler {
 
         let resp = [
             "redis: \(redisCheck.1)"
-        ].joinWithSeparator("\n")
+        ].joined(separator: "\n")
 
-        let status: Status = (redisCheck.0 ? .Ok : .InternalServerError)
-        return Response(status, contentType: "text/plain", body: resp)
+        let status: Response.Status = (redisCheck.0 ? .ok : .internalServerError)
+        return Response(status: status, text: resp)
     }
 }

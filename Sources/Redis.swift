@@ -12,7 +12,7 @@ func startRedis() throws -> Redbird {
     //Swift Foundation has broken .port for NSURLComponents, so we need to hack here
     //split string by colon, take last element and try to create an Int out of it.
     var port: Int = 6379
-    if let portCandidate = redisUrl.characters.split(":").map(String.init).last {
+    if let portCandidate = redisUrl.characters.split(separator: ":").map(String.init).last {
         if let p = Int(portCandidate) {
             port = p
         }

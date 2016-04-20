@@ -1,5 +1,5 @@
 
-struct Error: ErrorType {
+struct Error: ErrorProtocol {
     let message: String
     init(_ message: String) {
         self.message = message

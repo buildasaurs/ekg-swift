@@ -1,1 +1,1 @@
-web: ekg-swift --workers 5 --bind 0.0.0.0:$PORT
+web: ekg-swift --bind 0.0.0.0:$PORT

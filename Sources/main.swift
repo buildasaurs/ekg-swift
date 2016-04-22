@@ -15,6 +15,10 @@ do {
     // start the server
     let app = Application()
     
+    // middleware
+    app.middleware.append(TimerMiddleware())
+    
+    // routes
     app.get("/", handler: addRoot())
     app.get("/v1/beep/redis", handler: addHealth(redis: redis))
     app.post("/v1/beep", handler: addHeartbeat_Post(redis: redis))

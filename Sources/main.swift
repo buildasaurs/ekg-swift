@@ -1,6 +1,7 @@
 import Vapor
 import Redbird
 import Environment
+import VaporStencil
 
 typealias EndpointHandler = Request throws -> ResponseRepresentable
 
@@ -15,11 +16,15 @@ do {
     // start the server
     let app = Application()
     
+    //set the stencil renderer
+    //for all .stencil files
+    View.renderers[".stencil"] = StencilRenderer()
+    
     // middleware
     app.middleware.append(TimerMiddleware())
     
     // routes
-    app.get("/", handler: addRoot())
+    app.get("/", handler: addRoot(app: app))
     app.get("/v1/beep/redis", handler: addHealth(redis: redis))
     app.post("/v1/beep", handler: addHeartbeat_Post(redis: redis))
     app.get("/v1/beep/all", handler: addHeartbeat_GetAll(redis: redis))
@@ -28,7 +33,7 @@ do {
     app.start(port: port)
     
 } catch {
-    fatalError("\(error) Redis url: '\(Environment().getVar("REDIS_URL"))'")
+    fatalError("\(error)")
 }
 
 

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ekg</title>
+		<link rel="stylesheet" href="{{ csspath }}">
+	</head>
+	<body>
+		<a href="{{ ekglink }}">
+			<h1>ekg</h1>
+		</a>
+		<p>Where <a href="{{ buildalink }}">Buildasaur</a> sends its heartbeat.</p>
+	</body>
+</html>
